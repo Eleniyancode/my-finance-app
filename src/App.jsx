@@ -1,6 +1,6 @@
-import BudgetsPage from "./pages/BudgetsPage";
+import PotsPage from "./pages/PotsPage";
 function App() {
-  return <BudgetsPage />;
+  return <PotsPage />;
 }
 
 export default App;
