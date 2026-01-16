@@ -1,6 +1,7 @@
-import PotsPage from "./pages/PotsPage";
+import RecurringBillsPage from "./pages/RecurringBillsPage";
+import PotsPage from "./pages/RecurringBillsPage";
 function App() {
-  return <PotsPage />;
+  return <RecurringBillsPage />;
 }
 
 export default App;
