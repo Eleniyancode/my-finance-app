@@ -1,7 +1,10 @@
-import RecurringBillsPage from "./pages/RecurringBillsPage";
-import PotsPage from "./pages/RecurringBillsPage";
+import BudgetsPage from "./pages/BudgetsPage";
 function App() {
-  return <RecurringBillsPage />;
+  return (
+    <div className="relative">
+      <BudgetsPage />;
+    </div>
+  );
 }
 
 export default App;

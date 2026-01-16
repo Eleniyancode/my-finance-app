@@ -1,4 +1,10 @@
+import { useState } from "react";
+import SortTransactionCategories from "../components/dropdowns/SortTransactionCategories";
+import SortTransactionDates from "../components/dropdowns/SortTransactionDates";
 function TransactionsPage() {
+  const [showSortListByCategory, setshowSortListByCategory] = useState(false);
+  const [showSortListByDate, setshowSortListByDate] = useState(false);
+
   return (
     <>
       <div className="py-6 px-1 md:px-2 bg-[rgb(248,244,240)] lg:grid lg:grid-cols-5 w-screen">
@@ -63,13 +69,14 @@ function TransactionsPage() {
         <div className="lg:col-start-2 lg:col-end-6 flex-4/5 px-5 py-6 bg-[rgb(248,244,240)]">
           <h1 className="font-public-sans-bold text-3xl">Transactions</h1>
           <main className="mt-8 py-6 px-4 bg-white md:hidden">
-            <section className="flex justify-around items-center gap-4">
+            <section className="flex relative justify-around items-center gap-4">
               <div className="flex py-2 px-2 border-2 rounded-2xl border-gray-500">
                 <input
                   type="text"
                   className="hover:outline-0 active:outline-0 focus:outline-0"
                   placeholder="Search transactions"
                 />
+
                 <img
                   src="../images/icon-search.svg"
                   className="pr-3"
@@ -77,17 +84,32 @@ function TransactionsPage() {
                 />
               </div>
               <div className="flex justify-between gap-4">
-                <img
-                  src="../images/icon-filter-mobile.svg"
-                  className="size-6"
-                  alt="icon-filter"
-                />
-                <img
-                  src="../images/icon-sort-mobile.svg"
-                  className="size-6"
-                  alt="icon-sort"
-                />
+                <button
+                  className="cursor-pointer"
+                  onClick={() =>
+                    setshowSortListByCategory((clicked) => !clicked)
+                  }
+                >
+                  <img
+                    src="../images/icon-filter-mobile.svg"
+                    className="size-6"
+                    alt="icon-filter"
+                  />
+                </button>
+
+                <button
+                  className="cursor-pointer"
+                  onClick={() => setshowSortListByDate((clicked) => !clicked)}
+                >
+                  <img
+                    src="../images/icon-sort-mobile.svg"
+                    className="size-6"
+                    alt="icon-sort"
+                  />
+                </button>
               </div>
+              {showSortListByCategory && <SortTransactionCategories />}
+              {showSortListByDate && <SortTransactionDates />}
             </section>
 
             <section>

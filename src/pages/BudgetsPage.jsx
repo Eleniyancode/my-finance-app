@@ -1,4 +1,14 @@
+import { useState } from "react";
+import BudgetOptions from "../components/dropdowns/BudgetOptions";
+import AddNewBudgetForm from "../components/modals/AddNewBudgetForm";
+import EditBudgetForm from "../components/modals/EditBudgetForm";
+import DeleteBudgetForm from "../components/modals/DeleteBudgetForm";
 function BudgetsPage() {
+  const [showBudgetOption, setShowBudgetOption] = useState(false);
+  const [showNewBudgetForm, setShowNewBudgetForm] = useState(false);
+  const [showEditBudgetForm, setShowEditBudgetForm] = useState(false);
+  const [showDeleteBudgetForm, setShowDeleteBudgetForm] = useState(false);
+
   return (
     <>
       <header className="md:hidden">
@@ -100,7 +110,10 @@ function BudgetsPage() {
         <main className="lg:col-start-2 lg:col-end-6 lg:mt-5 pb-5">
           <header className="flex justify-between items-center">
             <h1 className="font-public-sans-bold text-3xl">Budgets</h1>
-            <button className="p-4 bg-black text-white rounded-lg font-public-sans font-bold">
+            <button
+              onClick={() => setShowNewBudgetForm(true)}
+              className="p-4 bg-black text-white rounded-lg font-public-sans font-bold cursor-pointer"
+            >
               + Add New Budget
             </button>
           </header>
@@ -165,7 +178,7 @@ function BudgetsPage() {
             </section>
 
             <div className="lg:flex lg:flex-col lg:flex-3">
-              <section className="mt-8 pt-8 pb-3 px-4 bg-white rounded-lg">
+              <section className="mt-8 pt-8 pb-3 px-4 bg-white rounded-lg relative">
                 <div className="flex justify-between items-center">
                   <div className="flex justify-between items-center gap-4">
                     <span className="w-5 h-5 rounded-full bg-teal-800"></span>
@@ -173,11 +186,22 @@ function BudgetsPage() {
                       Entertainment
                     </h3>
                   </div>
-                  <div>
+                  <div
+                    onClick={() => setShowBudgetOption((clicked) => !clicked)}
+                    className="cursor-pointer"
+                  >
                     <img
                       src="../images/icon-ellipsis.svg"
                       alt="icon-ellipsis"
+                      className="size-6 "
                     />
+
+                    {showBudgetOption && (
+                      <BudgetOptions
+                        setShowEditBudgetForm={setShowEditBudgetForm}
+                        setShowDeleteBudgetForm={setShowDeleteBudgetForm}
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -537,6 +561,32 @@ function BudgetsPage() {
           </div>
         </main>
       </div>
+      {showNewBudgetForm && (
+        <div
+          id="overlay"
+          className="fixed top-0 h-full w-full bg-black/60 flex items-center justify-center z-50"
+        >
+          <AddNewBudgetForm setShowNewBudgetForm={setShowNewBudgetForm} />
+        </div>
+      )}
+
+      {showEditBudgetForm && (
+        <div
+          id="overlay"
+          className="fixed top-0 h-full w-full bg-black/60 flex items-center justify-center z-50"
+        >
+          <EditBudgetForm setShowEditBudgetForm={setShowEditBudgetForm} />
+        </div>
+      )}
+      {showDeleteBudgetForm && (
+        <div
+          id="overlay"
+          className="fixed top-0 h-full w-full bg-black/60 flex items-center justify-center z-50"
+        >
+          <DeleteBudgetForm setShowDeleteBudgetForm={setShowDeleteBudgetForm} />
+        </div>
+      )}
+
       <footer className="hidden md:block lg:hidden">
         <nav>
           <ul className="flex bg-black p-4 pb-0 justify-around rounded-t-2xl ">
