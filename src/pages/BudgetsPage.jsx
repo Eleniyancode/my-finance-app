@@ -3,9 +3,10 @@ import BudgetOptions from "../components/dropdowns/BudgetOptions";
 import AddNewBudgetForm from "../components/modals/AddNewBudgetForm";
 import EditBudgetForm from "../components/modals/EditBudgetForm";
 import DeleteBudgetForm from "../components/modals/DeleteBudgetForm";
+import Navs from "../components/navs";
 function BudgetsPage() {
-  const [showBudgetOption, setShowBudgetOption] = useState(false);
   const [showNewBudgetForm, setShowNewBudgetForm] = useState(false);
+  const [showBudgetOption, setShowBudgetOption] = useState(false);
   const [showEditBudgetForm, setShowEditBudgetForm] = useState(false);
   const [showDeleteBudgetForm, setShowDeleteBudgetForm] = useState(false);
 
@@ -44,8 +45,9 @@ function BudgetsPage() {
           </ul>
         </nav>
       </header>
-      <div className="py-6 px-4 md:p-10 lg:pl-0 lg:pb-0 lg:pt-0 gap-10 overflow-x-hidden bg-[rgb(248,244,240)]  lg:grid lg:grid-cols-5 w-screen">
-        <aside className="hidden lg:block flex-1/5 h-full bg-black rounded-r-lg border-4  py-8">
+      <div className=" lg:grid lg:grid-cols-5 w-screen">
+        <Navs />
+        {/* <aside className="hidden lg:block flex-1/5 h-full bg-black rounded-r-lg border-4  py-8">
           <div className="px-5 mb-6">
             <img src="../images/logo-large.svg" alt="logo-image" />
           </div>
@@ -106,8 +108,8 @@ function BudgetsPage() {
               </li>
             </ul>
           </nav>
-        </aside>
-        <main className="lg:col-start-2 lg:col-end-6 lg:mt-5 pb-5">
+        </aside> */}
+        <main className="lg:col-start-2 lg:col-end-6 flex-4/5 px-5 py-6 bg-[rgb(248,244,240)]">
           <header className="flex justify-between items-center">
             <h1 className="font-public-sans-bold text-3xl">Budgets</h1>
             <button

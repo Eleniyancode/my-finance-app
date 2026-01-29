@@ -1,4 +1,11 @@
+import { useNavigate } from "react-router-dom";
+
 function LoginPage() {
+  const navigate = useNavigate();
+  function handleSubmit(e) {
+    e.preventDefault();
+    navigate("/overview");
+  }
   return (
     <>
       <div className="w-screen h-screen bg-[rgb(248,244,240)] lg:flex lg:p-3 ">
@@ -38,7 +45,7 @@ function LoginPage() {
             </div>
 
             <div className="flex justify-center items-center p-3 bg-black text-white rounded mb-8">
-              <button>Login</button>
+              <button onClick={(e) => handleSubmit(e)}>Login</button>
             </div>
 
             <p className="text-gray-500 text-center">

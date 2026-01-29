@@ -1,4 +1,4 @@
-function BudgetOptions({ setShowEditPotForm, setShowDeletePotForm }) {
+function PotOptions({ setShowEditPotForm, setShowDeletePotForm }) {
   return (
     <ul className="p-3 flex flex-col bg-white shadow-2xl absolute top-14 right-0 rounded-lg">
       <li className="p-2 border-b border-b-gray-300 cursor-pointer">
@@ -21,4 +21,4 @@ function BudgetOptions({ setShowEditPotForm, setShowDeletePotForm }) {
   );
 }
 
-export default BudgetOptions;
+export default PotOptions;

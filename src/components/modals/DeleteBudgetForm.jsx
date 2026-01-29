@@ -2,7 +2,7 @@ function DeleteBudgetForm({ setShowDeleteBudgetForm }) {
   return (
     <div className="bg-white w-full max-w-md mx-3 p-6 rounded-lg">
       <div className="flex justify-between ">
-        <h3 className="font-public-sans-bold text-lg">Add New Budget</h3>
+        <h3 className="font-public-sans-bold text-lg">Delete Budget</h3>
         <button
           onClick={() => setShowDeleteBudgetForm(false)}
           className="cursor-pointer"

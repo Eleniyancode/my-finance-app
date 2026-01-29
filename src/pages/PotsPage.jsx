@@ -1,4 +1,20 @@
+import { useState } from "react";
+import PotOptions from "../components/dropdowns/PotOptions";
+import AddNewPotForm from "../components/modals/AddNewPotForm";
+import EditPotForm from "../components/modals/EditPotForm";
+import DeletePotForm from "../components/modals/DeletePot";
+import WithdrawFromPotForm from "../components/modals/WithdrawFromPotForm";
+import SaveToPotForm from "../components/modals/SaveToPotForm";
+import Navs from "../components/navs";
+
 function PotsPage() {
+  const [showNewPotForm, setShowNewPotForm] = useState(false);
+  const [showPotOption, setShowPotOption] = useState(false);
+  const [showEditPotForm, setShowEditPotForm] = useState(false);
+  const [showDeletePotForm, setShowDeletePotForm] = useState(false);
+  const [showWithdrawFromPotForm, setShowWithdrawFromPotForm] = useState(false);
+  const [showSaveToPotForm, setShowSaveToPotForm] = useState(false);
+
   return (
     <>
       <header className="md:hidden">
@@ -34,8 +50,9 @@ function PotsPage() {
           </ul>
         </nav>
       </header>
-      <div className="py-6 px-4 md:p-10 lg:pl-0 lg:pb-0 lg:pt-0 gap-10 overflow-x-hidden bg-[rgb(248,244,240)]  lg:grid lg:grid-cols-5 w-screen">
-        <aside className="hidden lg:block flex-1/5 h-full bg-black rounded-r-lg border-4  py-8">
+      <div className="lg:grid lg:grid-cols-5 w-screen">
+        <Navs />
+        {/* <aside className="hidden lg:block flex-1/5 h-full bg-black rounded-r-lg border-4  py-8">
           <div className="px-5 mb-6">
             <img src="../images/logo-large.svg" alt="logo-image" />
           </div>
@@ -96,18 +113,21 @@ function PotsPage() {
               </li>
             </ul>
           </nav>
-        </aside>
-        <main className="lg:col-start-2 lg:col-end-6 lg:mt-5 pb-5">
+        </aside> */}
+        <main className="lg:col-start-2 lg:col-end-6 flex-4/5 px-5 py-6 bg-[rgb(248,244,240)]">
           <header className="flex justify-between items-center">
             <h1 className="font-public-sans-bold text-3xl">Pots</h1>
-            <button className="p-4 bg-black text-white rounded-lg font-public-sans font-bold">
+            <button
+              onClick={() => setShowNewPotForm(true)}
+              className="p-4 bg-black text-white rounded-lg font-public-sans font-bold"
+            >
               + Add New Pot
             </button>
           </header>
 
           <div className="lg:flex lg:gap-5 lg:items-start">
             <div className="lg:flex lg:flex-wrap lg:flex-3 lg:gap-5">
-              <section className="mt-8 pt-8 pb-3 px-4 bg-white rounded-lg lg:w-[45%]">
+              <section className="mt-8 pt-8 pb-3 px-4 bg-white rounded-lg lg:w-[45%] relative">
                 <div className="flex justify-between items-center">
                   <div className="flex justify-between items-center gap-4">
                     <span className="w-5 h-5 rounded-full bg-teal-800"></span>
@@ -116,10 +136,21 @@ function PotsPage() {
                     </h3>
                   </div>
                   <div>
-                    <img
-                      src="../images/icon-ellipsis.svg"
-                      alt="icon-ellipsis"
-                    />
+                    <button
+                      className="w-full cursor-pointer"
+                      onClick={() => setShowPotOption((clicked) => !clicked)}
+                    >
+                      <img
+                        src="../images/icon-ellipsis.svg"
+                        alt="icon-ellipsis"
+                      />
+                    </button>
+                    {showPotOption && (
+                      <PotOptions
+                        setShowEditPotForm={setShowEditPotForm}
+                        setShowDeletePotForm={setShowDeletePotForm}
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -143,11 +174,21 @@ function PotsPage() {
                     </div>
 
                     <div className="flex mt-8 gap-3">
-                      <div className=" gap-2 flex-1 flex flex-col p-3 bg-[rgb(248,244,240)] ">
-                        <button className="font-bold"> + Add Money</button>
+                      <div className=" cursor-pointer gap-2 flex-1 flex flex-col p-3 bg-[rgb(248,244,240)] ">
+                        <button
+                          className="cursor-pointer font-bold"
+                          onClick={() => setShowSaveToPotForm(true)}
+                        >
+                          + Add Money
+                        </button>
                       </div>
-                      <div className=" gap-2 flex-1 flex flex-col p-3 bg-[rgb(248,244,240)] ">
-                        <button className="font-bold"> Withdraw</button>
+                      <div className=" cursor-pointer gap-2 flex-1 flex flex-col p-3 bg-[rgb(248,244,240)] ">
+                        <button
+                          className="font-bold cursor-pointer"
+                          onClick={() => setShowWithdrawFromPotForm(true)}
+                        >
+                          Withdraw
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -345,6 +386,48 @@ function PotsPage() {
           </div>
         </main>
       </div>
+      {showNewPotForm && (
+        <div
+          id="overlay"
+          className="fixed top-0 h-full w-full bg-black/60 flex items-center justify-center z-50"
+        >
+          <AddNewPotForm setShowNewPotForm={setShowNewPotForm} />
+        </div>
+      )}
+      {showEditPotForm && (
+        <div
+          id="overlay"
+          className="fixed top-0 h-full w-full bg-black/60 flex items-center justify-center z-50"
+        >
+          <EditPotForm setShowEditPotForm={setShowEditPotForm} />
+        </div>
+      )}
+      {showDeletePotForm && (
+        <div
+          id="overlay"
+          className="fixed top-0 h-full w-full bg-black/60 flex items-center justify-center z-50"
+        >
+          <DeletePotForm setShowDeletePotForm={setShowDeletePotForm} />
+        </div>
+      )}
+      {showSaveToPotForm && (
+        <div
+          id="overlay"
+          className="fixed top-0 h-full w-full bg-black/60 flex items-center justify-center z-50"
+        >
+          <SaveToPotForm setShowSaveToPotForm={setShowSaveToPotForm} />
+        </div>
+      )}
+      {showWithdrawFromPotForm && (
+        <div
+          id="overlay"
+          className="fixed top-0 h-full w-full bg-black/60 flex items-center justify-center z-50"
+        >
+          <WithdrawFromPotForm
+            setShowWithdrawFromPotForm={setShowWithdrawFromPotForm}
+          />
+        </div>
+      )}
       <footer className="hidden md:block lg:hidden">
         <nav>
           <ul className="flex bg-black p-4 pb-0 justify-around rounded-t-2xl ">
